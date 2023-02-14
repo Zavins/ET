@@ -1,26 +1,67 @@
-# [English](https://github.com/egametang/Egametang/blob/master/README-EN.md) 
+# English: please use your browser to translate to english  
 
 # __讨论QQ群 : 474643097__  
 
 # [ET论坛](https://et-framework.cn)  
 
-# 重大注意事项：
-1. Hotfix跟HotfixView是纯逻辑的，类中不要带有任何字段，否则热更就会丢失
-2. ETTask跟要么调用Coroutine要么就await，打开VS中的错误列表窗口，没有使用这两种的会报出问题，虽然既不await也不Coroutine的话能够编译通过，但是会丢失异常，十分危险
-3. 请不要使用任何虚函数，用逻辑分发替代
-4. 请不要使用任何继承，除了继承Entity，用组合替代
+# [ET商店](https://github.com/egametang/ET/tree/master/Store)  
+
+# [ET6.0视频教程上线](https://edu.uwa4d.com/course-intro/1/375)   
+
+# [运行指南](https://github.com/egametang/ET/blob/master/Book/1.1%E8%BF%90%E8%A1%8C%E6%8C%87%E5%8D%97.md)  
+
+# [分析器说明](https://www.yuque.com/u28961999/yms0nt/)
+
+# Benchmark
+100W Ping Pong 平均耗时4秒左右，平均每秒收发20W的消息。这个网络性能远远超过主线程的需求，大家可以自己测试一下，测试方法：
+Unity Menu->ServerTools select Benchmark, Start Watcher。然后在Logs目录，打开Debug日志等一会所有连接完成就能看到下面的日志了。  
+2022-12-02 22:19:48.9837 (C2G_BenchmarkHandler.cs:13) benchmark count: 1000001  
+2022-12-02 22:19:53.4621 (C2G_BenchmarkHandler.cs:13) benchmark count: 2000001  
+2022-12-02 22:19:57.0416 (C2G_BenchmarkHandler.cs:13) benchmark count: 3000001  
+2022-12-02 22:20:00.6186 (C2G_BenchmarkHandler.cs:13) benchmark count: 4000001  
+2022-12-02 22:20:04.1384 (C2G_BenchmarkHandler.cs:13) benchmark count: 5000001  
+2022-12-02 22:20:08.2236 (C2G_BenchmarkHandler.cs:13) benchmark count: 6000001  
+2022-12-02 22:20:12.2842 (C2G_BenchmarkHandler.cs:13) benchmark count: 7000001  
+2022-12-02 22:20:15.8544 (C2G_BenchmarkHandler.cs:13) benchmark count: 8000001  
+2022-12-02 22:20:19.4085 (C2G_BenchmarkHandler.cs:13) benchmark count: 9000001  
+2022-12-02 22:20:24.2969 (C2G_BenchmarkHandler.cs:13) benchmark count: 10000001  
+2022-12-02 22:20:41.1448 (C2G_BenchmarkHandler.cs:13) benchmark count: 11000001  
+2022-12-02 22:20:44.7174 (C2G_BenchmarkHandler.cs:13) benchmark count: 12000001  
+2022-12-02 22:20:48.3188 (C2G_BenchmarkHandler.cs:13) benchmark count: 13000001  
+2022-12-02 22:20:51.7793 (C2G_BenchmarkHandler.cs:13) benchmark count: 14000001  
+2022-12-02 22:20:55.3379 (C2G_BenchmarkHandler.cs:13) benchmark count: 15000001  
+2022-12-02 22:20:58.8810 (C2G_BenchmarkHandler.cs:13) benchmark count: 16000001  
+2022-12-02 22:21:02.5156 (C2G_BenchmarkHandler.cs:13) benchmark count: 17000001  
+2022-12-02 22:21:06.0132 (C2G_BenchmarkHandler.cs:13) benchmark count: 18000001  
+2022-12-02 22:21:09.5320 (C2G_BenchmarkHandler.cs:13) benchmark count: 19000001  
+
+
+# ET7 发布! 18岁亦菲
+1. 调整结构，机器人工程与服务器合并，更易使用，一个进程同时可以做server，也能创建机器人，真正的ALL IN ONE! -- 已实现  
+2. 客户端跟服务端合并，服务端代码全部放在了客户端，客户端中可以带一个服务端，开发超级方便，服务端发布的时候可以选择发布成Dotnet也可以发布成UnityServer，终极All IN ONE  -- 已实现  
+3. Entity可视化，客户端跟服务端所有的Entity都实现了可视化，开启ENABLE_CODES宏，运行游戏，查看Hierarchy面板，展开Init/Global/Scene(Process)即可看到 -- 已实现  
+4. 因为所有代码都在Unity中，所以开发ET插件变得非常容易，直接使用Unity导入导出即可  -- 已实现  
+5. 增加软路由，可以防各种网络攻击而不影响正常玩家，网游必备！-- 已实现  
+6. 各种事件跟网络消息订阅带上DomainSceneType，更精确，更不容易出错 -- 已实现  
+7. sj兄弟添加了各种分析器，分析器保证了写出的代码必须符合ET规范，否则编译不通过！（这点ET6也增加上了） -- 已实现  
+8. ET7已经去除客户端热更新，请大家自己选择接入,接入huatuo或者ILRuntime都非常简单, 注意！(不要混淆客户端热更新跟服务端热更新，服务端热更新，ET一直都有)  
+9. 网络改成独立线程，序列化反序列化都在网络线程处理，主线程压力大大减轻。并且重新整理了网络层代码，更优美了  
+10. 集成Unity.Mathematic数学库，逻辑层客户端跟服务端都使用这一套数学库，这样服务端跟客户端完全统一了  
+11. ENABLE_CODES模式下拆分成4个程序集，解决分析器失效的问题  
+12. Game管理的Singleton增加ISingletonUpdate跟ISingletonLateUpdate接口，实现相应的接口即可执行对应的Update跟LateUpdate方法，Game类解除了跟EventSystem等单间类的耦合关系  
+13. Actor消息判断如果是发向自己的进程则不用通过网络，直接处理即可，大大提升性能  
 
 
 # ET6 发布！ET6相比ET5有巨大变化，可以说是凤姐变亦菲，6.0拥有如下惊人的特点
 1. 客户端逻辑全热更新（基于ILRuntime），没有不能更的部分  
 2. 客户端服务端均可热重载，开发不用重启客户端服务端即可修改逻辑代码，开发极其方便  
-2. 机器人框架，方便压测服务端  
-3. 测试用例框架，方便编写服务端测试用例  
-4. AI框架，写AI比写UI还简单  
-5. 新的服务端架构，极其优美  
-6. 内外网kcp网络，性能强劲  
+3. 机器人框架，ET6的客户端的逻辑跟表现分离，机器人程序直接共享利用客户端的逻辑层代码做压测，只需要极少代码即可做出机器人，方便压测服务端  
+4. 测试用例框架，利用客户端的逻辑层代码写单元测试，每个单元测试都是完整的游戏环境，无需各种恶心的mock  
+5. AI框架，比行为树更加方便，写AI比写UI还简单  
+6. 新的服务端架构，极其优美  
+7. 内外网kcp网络，性能强劲，搭配软路由模块，可以防各种网络攻击  
 
-# ET开发的商业mmo项目千古风流成功上线，64核128G内存的单服单物理机1.5W在线（实际线上策划为了生态限制为单服6000人同时在线，6000人的话cpu消耗约为30%）。为了堆栈行号正常，线上跑得是Debug版，如果使用Release版开启优化，性能还能翻一倍，达到单物理机3W在线！上线两个月来十分稳定。千古风流使用了ET框架从零开发，用时两年，这个开发速度可以说无人出其右。千古风流的成功上线证明了ET具备开发任何大型游戏的能力，开发速度，开发效率都令人叹为观止！千古风流使用到的客户端服务器技术：  
+# ET开发的商业mmo项目千古风流成功上线，64核128G内存的单服单物理机1.5W在线（实际线上策划为了生态限制为单服6000人同时在线，6000人的话cpu消耗约为30%）。为了堆栈行号正常，线上跑得是Debug版，如果使用Release版开启优化，性能还能翻一倍，达到单物理机3W在线！上线5个月来十分稳定。千古风流使用了ET框架从零开发，用时两年，这个开发速度可以说无人出其右。千古风流的成功上线证明了ET具备开发任何大型游戏的能力，开发速度，开发效率都令人叹为观止！千古风流使用到的客户端服务器技术：  
 1. 动态副本跟分线，按需分配，用完回收  
 2. 分线合线，分线人数较少会把多条线合并。合线功能基本上其它mmo游戏很少见到  
 3. 客户端服务端场景无缝切换，也就是无缝大世界技术  
@@ -92,8 +133,6 @@ d.提供一个同步工具
 
 ET框架是一个强大灵活的分布式服务端架构，完全可以满足绝大部分大型游戏需求。使用这套框架，客户端开发者就可以自己完成双端开发，节省大量人力物力，节省大量沟通时间。  
 
-使用方法：  
-[运行指南](https://github.com/egametang/ET/blob/master/Book/1.1%E8%BF%90%E8%A1%8C%E6%8C%87%E5%8D%97.md)  
   
 相关网站:  
 [ET论坛](https://et-framework.cn)  
@@ -101,7 +140,7 @@ ET框架是一个强大灵活的分布式服务端架构，完全可以满足绝
 群友分享：  
 [行为树与fgui分支(Duke Chiang开发维护)](https://github.com/DukeChiang/ET.git)   
 [ET学习笔记系列(烟雨迷离半世殇写)](https://www.lfzxb.top/)   
-[ET学习笔记系列(咲夜詩写)](https://acgmart.com/unity/)   
+[图形渲染与ET学习笔记(咲夜詩写)](https://acgmart.com/)   
 [框架服务端运行流程](http://www.cnblogs.com/fancybit/p/et1.html)  
 [ET启动配置](http://www.cnblogs.com/fancybit/p/et2.html)  
 [框架demo介绍](http://www.jianshu.com/p/f2ea0d26c7c1)  
@@ -116,19 +155,21 @@ ET框架是一个强大灵活的分布式服务端架构，完全可以满足绝
 
 商业项目:  
 1. [千古风流](https://www.qiangu.com/)  
-2. [养不大](https://www.taptap.com/app/71064)  
-3. 天天躲猫猫2（ios2019春节下载排行19）  
-4. [牛虎棋牌](https://gitee.com/ECPS_admin/PlanB)  
-5. [五星麻将](https://github.com/wufanjoin/fivestar)  
+2. [魔法点点2](https://www.taptap.com/app/227804)  
+3. [养不大](https://www.taptap.com/app/71064)  
+4. 天天躲猫猫2（ios2019春节下载排行19）  
+5. [牛虎棋牌](https://gitee.com/ECPS_admin/PlanB)  
+6. [五星麻将](https://github.com/wufanjoin/fivestar)  
 
 群友demo：  
 1. [斗地主（客户端服务端）](https://github.com/Viagi/LandlordsCore)  
 2. [背包系统](https://gitee.com/ECPS_admin/planc)  
-3. [ET小游戏合集](https://github.com/Acgmart/ET-MultiplyDemos)  
+3. [移动端渲染技术demo](https://github.com/Acgmart/Sekia_TechDemo)  
 
 
 
 视频教程：  
+[字母哥ET6.0教程](https://edu.uwa4d.com/course-intro/1/375)   
 [肉饼老师主讲](http://www.taikr.com/my/course/972)  
 [官剑铭主讲](https://edu.manew.com/course/796)  
 [ET新手教程-初见主讲](https://pan.baidu.com/s/1a5-j2R5QctZpC9n3sMC9QQ) 密码: ru1j  
